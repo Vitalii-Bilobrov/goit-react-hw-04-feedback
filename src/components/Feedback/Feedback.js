@@ -1,5 +1,6 @@
 import React from 'react';
 import FeedbackOptions from './FeedbackOptions';
+import Statistics from './Statistics';
 import PropTypes from 'prop-types';
 import { Feedback } from './Feedback.styled';
 
@@ -14,6 +15,14 @@ class Counter extends React.Component {
     good: 0,
     neutral: 0,
     bad: 0,
+  };
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+  countPositiveFeedbackPercentage = () => {
+    const { good, neutral, bad } = this.state;
+    return Math.round((good / (good + neutral + bad)) * 100);
   };
 
   handleGood = () => {
@@ -45,29 +54,13 @@ class Counter extends React.Component {
           onHandleGood={this.handleGood}
           onHandleBad={this.handleBad}
         />
-        <h1>Statistics</h1>
-        <ul>
-          <li>
-            <span>Good</span>
-            <span>{this.state.good}</span>
-          </li>
-          <li>
-            <span>Neutral</span>
-            <span>{this.state.neutral}</span>
-          </li>
-          <li>
-            <span>Bad</span>
-            <span>{this.state.bad}</span>
-          </li>
-          <li>
-            <span>Total</span>
-            <span></span>
-          </li>
-          <li>
-            <span>Positive feedback</span>
-            <span></span>
-          </li>
-        </ul>
+        <Statistics
+          onNeutral={this.state.neutral}
+          onGood={this.state.good}
+          onBad={this.state.bad}
+          onTotalFeedback={this.countTotalFeedback()}
+          onPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
+        />
       </>
     );
   }
