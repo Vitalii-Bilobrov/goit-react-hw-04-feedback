@@ -1,6 +1,8 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
+import css from './Statistics.module.css';
 
-const Statistics = ({
+export const Statistics = ({
   onNeutral,
   onGood,
   onBad,
@@ -8,7 +10,6 @@ const Statistics = ({
   onPositiveFeedbackPercentage,
 }) => (
   <>
-    <h1>Statistics</h1>
     <ul>
       <li>
         <span>Good:</span>
@@ -33,4 +34,11 @@ const Statistics = ({
     </ul>
   </>
 );
-export default Statistics;
+
+Statistics.propTypes = {
+  onGood: PropTypes.number.isRequired,
+  onNeutral: PropTypes.number.isRequired,
+  onBad: PropTypes.number.isRequired,
+  onTotalFeedback: PropTypes.number.isRequired,
+  onPositiveFeedbackPercentage: PropTypes.number.isRequired,
+};
