@@ -27,11 +27,10 @@ export class App extends Component {
     return Math.round((good / (good + neutral + bad)) * 100);
   };
 
-  onLeaveFeedback = e => {
-    const target = e.currentTarget.name;
+  onLeaveFeedback = option => {
     this.setState(prevState => {
       return {
-        [target]: prevState[target] + 1,
+        [option.target.name]: prevState[option.target.name] + 1,
       };
     });
   };
